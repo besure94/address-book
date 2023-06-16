@@ -37,3 +37,33 @@ function Contact(firstName, lastName, phoneNumber) {
 Contact.prototype.fullName = function() {
 	return this.firstName + " " + this.lastName;
 };
+
+let addressBook = new AddressBook();
+
+function listContacts(addressBookToDisplay) {
+	let contactsDiv = document.querySelector("div#contacts");
+	contactsDiv.innerText = null;
+	const ul = document.createElement("ul");
+	Object.keys(addressBookToDisplay.contacts).forEach(function(key) {
+		const contact = addressBookToDisplay.findContact(key);
+		const li = document.createElement("li");
+		li.append(contact.fullName());
+		li.setAttribute("id", contact.id);
+		ul.append(li);
+	});
+	contactsDiv.append(ul);
+}
+
+function handleFormSubmission(event) {
+	event.preventDefault();
+	const inputtedFirstName = document.querySelector("input#new-first-name").value;
+	const inputtedLastName = document.querySelector("input#new-last-name").value;
+	const inputtedPhoneNumber = document.querySelector("input#new-phone-number").value;
+	let newContact = new Contact(inputtedFirstName, inputtedLastName, inputtedPhoneNumber);
+	addressBook.addContact(newContact);
+	console.log(addressBook.contacts);
+}
+
+window.addEventListener("load", function () {
+	document.querySelector("form#new-contact").addEventListener("submit", handleFormSubmission);
+});
