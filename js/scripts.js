@@ -26,7 +26,7 @@ AddressBook.prototype.deleteContact = function(id) {
 	}
 	delete this.contacts[id];
 	return true;
-}
+};
 
 function Contact(firstName, lastName, phoneNumber) {
 	this.firstName = firstName;
@@ -54,6 +54,14 @@ function listContacts(addressBookToDisplay) {
 	contactsDiv.append(ul);
 }
 
+function displayContactDetails(event) {
+	const contact = addressBook.findContact(event.target.id);
+	document.querySelector(".first-name").innerText = contact.firstName;
+	document.querySelector(".last-name").innerText = contact.lastName;
+	document.querySelector(".phone-number").innerText = contact.phoneNumber;
+	document.querySelector("div#contact-details").removeAttribute("class");
+}
+
 function handleFormSubmission(event) {
 	event.preventDefault();
 	const inputtedFirstName = document.querySelector("input#new-first-name").value;
@@ -61,9 +69,10 @@ function handleFormSubmission(event) {
 	const inputtedPhoneNumber = document.querySelector("input#new-phone-number").value;
 	let newContact = new Contact(inputtedFirstName, inputtedLastName, inputtedPhoneNumber);
 	addressBook.addContact(newContact);
-	console.log(addressBook.contacts);
+	listContacts(addressBook);
 }
 
 window.addEventListener("load", function () {
 	document.querySelector("form#new-contact").addEventListener("submit", handleFormSubmission);
+	document.querySelector("div#contacts").addEventListener("click", displayContactDetails);
 });
