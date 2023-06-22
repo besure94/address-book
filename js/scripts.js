@@ -68,14 +68,24 @@ function displayContactDetails(event) {
 	document.querySelector(".phone-number").innerText = contact.phoneNumber;
 	let emailAddressDiv = document.querySelector("div#email-address-list");
 	emailAddressDiv.innerHTML = "";
-	const ul = document.createElement("ul");
+	let ul = document.createElement("ul");
 	contact.emailAddresses.forEach(function(emailAddress) {
-		const li = document.createElement("li");
+		let li = document.createElement("li");
 		li.append("(" + emailAddress.type + ") " + emailAddress.detail);
 		ul.append(li);
 	});
 	emailAddressDiv.append(ul);
-	document.querySelector(".physical-address").innerText = contact.physicalAddresses.detail;
+
+	let physicalAddressDiv = document.querySelector("div#physical-address-list");
+	physicalAddressDiv.innerHTML = "";
+	let ol = document.createElement("ol");
+	contact.physicalAddresses.forEach(function(physicalAddress) {
+		let li = document.createElement("li");
+		li.append(physicalAddress.type + " (" + physicalAddress.detail + ") ");
+		ol.append(li);
+	});
+	physicalAddressDiv.append(ol);
+	// document.querySelector(".physical-address").innerText = contact.physicalAddresses.detail;
 	document.querySelector("button.delete").setAttribute("id", contact.id);
 	document.querySelector("div#contact-details").removeAttribute("class");
 }
@@ -102,16 +112,33 @@ function createEmailAddresses() {
 	return arrayOfAddresses;
 }
 
+function createPhysicalAddresses() {
+	let arrayOfPhysicalAddresses = [];
+	for(index = 1; index <= 3; index++) {
+		let physicalAddressValueTargetString = "input#new-physical-address" + index;
+		let physicalAddressTypeTargetString = "input[name='physical-address-type" + index + "']:checked";
+		let physicalAddress = document.querySelector(physicalAddressValueTargetString).value;
+		let physicalAddressType = document.querySelector(physicalAddressTypeTargetString).value;
+		if (physicalAddress.length !== 0) {
+			let newPhysicalAddress = new Address(physicalAddress, physicalAddressType);
+			arrayOfPhysicalAddresses.push(newPhysicalAddress);
+		}
+	}
+	return arrayOfPhysicalAddresses;
+}
+
 function handleFormSubmission(event) {
 	event.preventDefault();
 	createEmailAddresses();
+	createPhysicalAddresses();
 	const inputtedFirstName = document.querySelector("input#new-first-name").value;
 	const inputtedLastName = document.querySelector("input#new-last-name").value;
 	const inputtedPhoneNumber = document.querySelector("input#new-phone-number").value;
-	const inputtedPhysicalAddress = document.querySelector("input#new-physical-address").value;
-	const addressTwo = new Address("physical", inputtedPhysicalAddress);
+	// const inputtedPhysicalAddress = document.querySelector("input#new-physical-address").value;
+	// const addressTwo = new Address("physical", inputtedPhysicalAddress);
+	const physicalAddresses = createPhysicalAddresses();
 	const emailAddresses = createEmailAddresses();
-	let newContact = new Contact(inputtedFirstName, inputtedLastName, inputtedPhoneNumber, emailAddresses, addressTwo);
+	let newContact = new Contact(inputtedFirstName, inputtedLastName, inputtedPhoneNumber, emailAddresses, physicalAddresses);
 	addressBook.addContact(newContact);
 	listContacts(addressBook);
 	document.querySelector("input#new-first-name").value = null;
@@ -120,7 +147,9 @@ function handleFormSubmission(event) {
 	document.querySelector("input#new-email-address1").value = null;
 	document.querySelector("input#new-email-address2").value = null;
 	document.querySelector("input#new-email-address3").value = null;
-	document.querySelector("input#new-physical-address").value = null;
+	document.querySelector("input#new-physical-address1").value = null;
+	document.querySelector("input#new-physical-address2").value = null;
+	document.querySelector("input#new-physical-address3").value = null;
 }
 
 window.addEventListener("load", function () {
