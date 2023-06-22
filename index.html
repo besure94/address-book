@@ -51,8 +51,24 @@
 						</div>
 
 						<div class="form-group">
-							<label for="new-physical-address">Address</label>
-							<input type="text" class="form-control" id="new-physical-address" name="new-physical-address" value="5454 NE Russell Street">
+							<label for="new-physical-address1">Address</label>
+							<input type="text" class="form-control" id="new-physical-address1" name="new-physical-address1" value="5454 NE Russell Street">
+							<input type="radio" id="home-address1" name="physical-address-type1" value="home" checked>
+							<label for="home-address1">Home</label>
+							<input type="radio" id="mailing-address1" name="physical-address-type1" value="mailing">
+							<label for="mailing-address1">Mailing</label>
+
+							<input type="text" class="form-control" id="new-physical-address2" name="new-physical-address2" value="4343 NE MLK Blvd">
+							<input type="radio" id="home-address2" name="physical-address-type2" value="home" checked>
+							<label for="home-address2">Home</label>
+							<input type="radio" id="mailing-address2" name="physical-address-type2" value="mailing">
+							<label for="mailing-address2">Mailing</label>
+
+							<input type="text" class="form-control" id="new-physical-address3" name="new-physical-address3" value="4567 SE 122nd Ave">
+							<input type="radio" id="home-address3" name="physical-address-type3" value="home" checked>
+							<label for="home-address3">Home</label>
+							<input type="radio" id="mailing-address3" name="physical-address-type3" value="mailing">
+							<label for="mailing-address3">Mailing</label>
 						</div>
 						<button type="submit">Add</button>
 					</form>
@@ -69,7 +85,8 @@
 						<p>Phone Number: <span class="phone-number"></span></p>
 						<p>Email Address: </p>
 						<div id="email-address-list"></div>
-						<p>Physical Address: <span class="physical-address"></span></p>
+						<p>Physical Address: </p>
+						<div id="physical-address-list"></div>
 						<button class="btn-primary delete" type="button">Delete</button>
 					</div>
 				</div>
