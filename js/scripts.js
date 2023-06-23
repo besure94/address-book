@@ -68,7 +68,7 @@ function displayContactDetails(event) {
 	document.querySelector(".phone-number").innerText = contact.phoneNumber;
 	let emailAddressDiv = document.querySelector("div#email-address-list");
 	emailAddressDiv.innerHTML = "";
-	let ul = document.createElement("ul");
+	const ul = document.createElement("ul");
 	contact.emailAddresses.forEach(function(emailAddress) {
 		let li = document.createElement("li");
 		li.append("(" + emailAddress.type + ") " + emailAddress.detail);
@@ -78,14 +78,13 @@ function displayContactDetails(event) {
 
 	let physicalAddressDiv = document.querySelector("div#physical-address-list");
 	physicalAddressDiv.innerHTML = "";
-	let ol = document.createElement("ol");
+	const ulPhysicalAddresses = document.createElement("ul");
 	contact.physicalAddresses.forEach(function(physicalAddress) {
 		let li = document.createElement("li");
-		li.append(physicalAddress.type + " (" + physicalAddress.detail + ") ");
-		ol.append(li);
+		li.append(" (" + physicalAddress.type + ") " + physicalAddress.detail);
+		ulPhysicalAddresses.append(li);
 	});
-	physicalAddressDiv.append(ol);
-	// document.querySelector(".physical-address").innerText = contact.physicalAddresses.detail;
+	physicalAddressDiv.append(ulPhysicalAddresses);
 	document.querySelector("button.delete").setAttribute("id", contact.id);
 	document.querySelector("div#contact-details").removeAttribute("class");
 }
@@ -120,7 +119,7 @@ function createPhysicalAddresses() {
 		let physicalAddress = document.querySelector(physicalAddressValueTargetString).value;
 		let physicalAddressType = document.querySelector(physicalAddressTypeTargetString).value;
 		if (physicalAddress.length !== 0) {
-			let newPhysicalAddress = new Address(physicalAddress, physicalAddressType);
+			let newPhysicalAddress = new Address(physicalAddressType, physicalAddress);
 			arrayOfPhysicalAddresses.push(newPhysicalAddress);
 		}
 	}
@@ -134,8 +133,6 @@ function handleFormSubmission(event) {
 	const inputtedFirstName = document.querySelector("input#new-first-name").value;
 	const inputtedLastName = document.querySelector("input#new-last-name").value;
 	const inputtedPhoneNumber = document.querySelector("input#new-phone-number").value;
-	// const inputtedPhysicalAddress = document.querySelector("input#new-physical-address").value;
-	// const addressTwo = new Address("physical", inputtedPhysicalAddress);
 	const physicalAddresses = createPhysicalAddresses();
 	const emailAddresses = createEmailAddresses();
 	let newContact = new Contact(inputtedFirstName, inputtedLastName, inputtedPhoneNumber, emailAddresses, physicalAddresses);
