@@ -1,6 +1,9 @@
 import AddressBook from './addressbook.js';
 import Address from './address.js';
 import Contact from './contact.js';
+import 'bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './css/styles.css';
 
 let addressBook = new AddressBook();
 
@@ -55,7 +58,7 @@ function handleDelete(event) {
 
 function createEmailAddresses() {
 	let arrayOfAddresses = [];
-	for(index = 1; index <= 3; index++) {
+	for(let index = 1; index <= 3; index++) {
 		let emailValueTargetString = "input#new-email-address" + index;
 		let emailTypeTargetString = "input[name='email-address-type" + index + "']:checked";
 		let emailAddress = document.querySelector(emailValueTargetString).value;
@@ -70,7 +73,7 @@ function createEmailAddresses() {
 
 function createPhysicalAddresses() {
 	let arrayOfPhysicalAddresses = [];
-	for(index = 1; index <= 3; index++) {
+	for(let index = 1; index <= 3; index++) {
 		let physicalAddressValueTargetString = "input#new-physical-address" + index;
 		let physicalAddressTypeTargetString = "input[name='physical-address-type" + index + "']:checked";
 		let physicalAddress = document.querySelector(physicalAddressValueTargetString).value;
