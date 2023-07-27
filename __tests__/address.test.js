@@ -1,8 +1,9 @@
 import Address from './../src/address.js';
 import Contact from './../src/contact.js';
+import AddressBook from './../src/addressbook';
 
 describe('Address', () => {
-  test('should correctly create an address object with an address type and address details', () => {
+  test('should correctly create an address object with an address type and address detail', () => {
     const address = new Address("personal", "email");
     expect(address.type).toBe("personal");
     expect(address.detail).toBe("email");
@@ -21,5 +22,12 @@ describe('Contact', () => {
   test('should correctly use a method to combine the first and last name of the contact', () => {
     const contact = new Contact("Andrew", "Johnson");
     expect(contact.fullName()).toBe("Andrew Johnson");
+  });
+});
+
+describe('AddressBook', () => {
+  test('should correctly create an address book object with properties for contacts and current contact ID', () => {
+    const addressBook = new AddressBook();
+    expect(addressBook.contacts).toEqual({});
   });
 });
