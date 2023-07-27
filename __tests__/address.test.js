@@ -20,8 +20,8 @@ describe('Contact', () => {
     expect(contact.physicalAddresses).toBe("12000 SE Foster Road");
   });
   test('should correctly use a method to combine the first and last name of the contact', () => {
-    const contact = new Contact("Andrew", "Johnson");
-    expect(contact.fullName()).toBe("Andrew Johnson");
+    const contactName = new Contact("Andrew", "Johnson");
+    expect(contactName.fullName()).toBe("Andrew Johnson");
   });
 });
 
@@ -29,5 +29,12 @@ describe('AddressBook', () => {
   test('should correctly create an address book object with properties for contacts and current contact ID', () => {
     const addressBook = new AddressBook();
     expect(addressBook.contacts).toEqual({});
+    expect(addressBook.currentId).toEqual(0);
+  });
+  test('should correctly use a method to add a contact containing a unique ID and the contacts name', () => {
+    const testAddressBook = new AddressBook();
+    const newContact = new Contact("Andrew", "Johnson", "503-541-9710", "ajohnson@gmail.com", "12000 SE Foster Road");
+    testAddressBook.addContact(newContact);
+    expect(testAddressBook.currentId).toEqual(testAddressBook.contacts[testAddressBook.currentId].id);
   });
 });
