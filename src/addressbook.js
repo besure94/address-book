@@ -20,11 +20,11 @@ AddressBook.prototype.findContact = function(contactId) {
   return false;
 };
 
-// AddressBook.prototype.deleteContact = function(id) {
-//   if (this.contacts[id] === undefined) {
-//     return false;
-//   }
-//   delete this.contacts[id];
-//   return true;
-// };
+AddressBook.prototype.deleteContact = function(id) {
+  if (this.contacts[id] === undefined) {
+    return false;
+  }
+  delete this.contacts[id];
+  return true;
+};
 
