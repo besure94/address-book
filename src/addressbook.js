@@ -13,12 +13,12 @@ AddressBook.prototype.assignId = function() {
   return this.currentId;
 };
 
-// AddressBook.prototype.findContact = function(id) {
-//   if (this.contacts[id] !== undefined) {
-//     return this.contacts[id];
-//   }
-//   return false;
-// };
+AddressBook.prototype.findContact = function(contactId) {
+  if (this.contacts[contactId] !== undefined) {
+    return this.contacts[contactId];
+  }
+  return false;
+};
 
 // AddressBook.prototype.deleteContact = function(id) {
 //   if (this.contacts[id] === undefined) {
