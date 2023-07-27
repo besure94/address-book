@@ -37,4 +37,10 @@ describe('AddressBook', () => {
     testAddressBook.addContact(newContact);
     expect(testAddressBook.currentId).toEqual(testAddressBook.contacts[testAddressBook.currentId].id);
   });
+  test('should correctly use a method to find a contact based on its ID', () => {
+    const searchAddressBook = new AddressBook();
+    const searchContact = new Contact("Andrew", "Johnson", "503-541-9710", "ajohnson@gmail.com", "12000 SE Foster Road");
+    searchAddressBook.findContact(searchContact);
+    expect(searchAddressBook.contacts[searchAddressBook.currentId]).toEqual(searchAddressBook.contacts[searchContact.contactId]);
+  });
 });
