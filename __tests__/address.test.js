@@ -6,8 +6,8 @@ describe('Address', () => {
     const address = new Address("personal", "email");
     expect(address.type).toBe("personal");
     expect(address.detail).toBe("email");
-  })
-})
+  });
+});
 
 describe('Contact', () => {
   test('should correctly create a contact object with properties for first name, last name, phone number, email address, and physical address', () => {
@@ -17,5 +17,9 @@ describe('Contact', () => {
     expect(contact.phoneNumber).toBe("503-541-9710");
     expect(contact.emailAddresses).toBe("ajohnson@gmail.com");
     expect(contact.physicalAddresses).toBe("12000 SE Foster Road");
-  })
-})
+  });
+  test('should correctly use a method to combine the first and last name of the contact', () => {
+    const contact = new Contact("Andrew", "Johnson");
+    expect(contact.fullName()).toBe("Andrew Johnson");
+  });
+});
