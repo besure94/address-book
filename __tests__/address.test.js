@@ -43,4 +43,10 @@ describe('AddressBook', () => {
     searchAddressBook.findContact(searchContact);
     expect(searchAddressBook.contacts[searchAddressBook.currentId]).toEqual(searchAddressBook.contacts[searchContact.contactId]);
   });
+  test('should correctly use a method to delete a contact', () => {
+    const editAddressBook = new AddressBook();
+    const removedContact = new Contact("Andrew", "Johnson", "503-541-9710", "ajohnson@gmail.com", "12000 SE Foster Road");
+    editAddressBook.deleteContact(removedContact);
+    expect(editAddressBook.contacts[editAddressBook.currentId]).toEqual(editAddressBook.contacts[removedContact.contactId]);
+  });
 });
