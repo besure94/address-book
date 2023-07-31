@@ -37,16 +37,27 @@ describe('AddressBook', () => {
     testAddressBook.addContact(newContact);
     expect(testAddressBook.currentId).toEqual(testAddressBook.contacts[testAddressBook.currentId].id);
   });
-  test('should correctly use a method to find a contact based on its ID', () => {
+  test('should correctly use a method to return a contact based on its ID', () => {
     const searchAddressBook = new AddressBook();
     const searchContact = new Contact("Andrew", "Johnson", "503-541-9710", "ajohnson@gmail.com", "12000 SE Foster Road");
-    searchAddressBook.findContact(searchContact);
-    expect(searchAddressBook.contacts[searchAddressBook.currentId]).toEqual(searchAddressBook.contacts[searchContact.contactId]);
+    searchAddressBook.addContact(searchContact);
+    const foundContact = searchAddressBook.findContact(1);
+    expect(foundContact).toEqual(searchAddressBook.contacts[1]);
   });
-  test('should correctly use a method to delete a contact', () => {
+  test('should return false if contact is not found', () => {
+    const searchAddressBook = new AddressBook();
+    const searchContact = new Contact("Andrew", "Johnson", "503-541-9710", "ajohnson@gmail.com", "12000 SE Foster Road");
+    searchAddressBook.addContact(searchContact);
+    const foundContact = searchAddressBook.findContact(2);
+    expect(foundContact).toEqual(false);
+  });
+  test('should correctly delete a contact or return false if contact is not found', () => {
     const editAddressBook = new AddressBook();
     const removedContact = new Contact("Andrew", "Johnson", "503-541-9710", "ajohnson@gmail.com", "12000 SE Foster Road");
-    editAddressBook.deleteContact(removedContact);
-    expect(editAddressBook.contacts[editAddressBook.currentId]).toEqual(editAddressBook.contacts[removedContact.contactId]);
+    editAddressBook.addContact(removedContact);
+    const deleteResults = editAddressBook.deleteContact(1);
+    const falseDeleteResult = editAddressBook.deleteContact(2);
+    expect(deleteResults).toEqual(true);
+    expect(falseDeleteResult).toEqual(false);
   });
 });
